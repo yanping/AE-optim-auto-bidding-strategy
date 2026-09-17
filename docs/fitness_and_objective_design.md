@@ -33,7 +33,7 @@ $$
 \max_{\pi} \quad & \sum_{t=1}^{T} \mathrm{Click}_t(b_t) \\
 \text{s.t.} \quad & \sum_{t=1}^{T} \mathrm{Cost}_t(b_t) \le B \quad \text{(Global Budget Constraint)} \\
 & \frac{\sum_{t=1}^{T} \mathrm{Cost}_t(b_t)}{\sum_{t=1}^{T} \mathrm{Click}_t(b_t)} \le \mathrm{CPC}_{\mathrm{target}} \quad \text{(Target CPC Constraint)} \\
-& b_t \in \operatorname{Support}(\mathcal{D}_{\mathrm{history}}) \quad \text{(Distribution Support Constraint)}
+& b_t \in \mathrm{Support}(\mathcal{D}_{\mathrm{history}}) \quad \text{(Distribution Support Constraint)}
 \end{aligned}
 $$
 

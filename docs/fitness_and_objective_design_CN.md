@@ -34,7 +34,7 @@ $$
 \max_{\pi} \quad & \sum_{t=1}^{T} \mathrm{Click}_t(b_t) \\
 \text{s.t.} \quad & \sum_{t=1}^{T} \mathrm{Cost}_t(b_t) \le B \quad \text{（全局预算硬约束）} \\
 & \frac{\sum_{t=1}^{T} \mathrm{Cost}_t(b_t)}{\sum_{t=1}^{T} \mathrm{Click}_t(b_t)} \le \mathrm{CPC}_{\mathrm{target}} \quad \text{（目标成本硬约束）} \\
-& b_t \in \operatorname{Support}(\mathcal{D}_{\mathrm{history}}) \quad \text{（数据有效性与分布可信约束）}
+& b_t \in \mathrm{Support}(\mathcal{D}_{\mathrm{history}}) \quad \text{（数据有效性与分布可信约束）}
 \end{aligned}
 $$
 
