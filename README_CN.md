@@ -7,9 +7,9 @@
 本项目针对现代实时竞价（Real-Time Bidding, RTB）中买方单边删失（Censored Feedback，买方仅知己方胜出时支付价格，未知落败竞价及对手底牌）的核心业务痛点，通过 Kaplan-Meier 极限定理建立高精度买方响应模型，驱动 AlphaEvolve 在 Python 代码符号空间中进行自主重构与演化，突破传统人工经验规则与强化学习调参瓶颈，在严格遵守目标 CPC 硬上限的约束下，最大化广告主真实转化与点击收益。
 
 > 📘 **架构白皮书与客户推介材料**：
-> - 完整方案宏观介绍、生产落地飞轮辨析与买方删失数据说明详见 [docs/client_presentation_guide.md](docs/client_presentation_guide.md)。
-> - 适应度得分的数学形式与多目标运筹学推导详见 [docs/fitness_and_objective_design.md](docs/fitness_and_objective_design.md)。
-> - iPinYou 数据集特征工程与清洗规范详见 [docs/ipinyou_real_data_report.md](docs/ipinyou_real_data_report.md)。
+> - 完整方案宏观介绍、生产落地飞轮辨析与买方删失数据说明详见 [docs/client_presentation_guide_CN.md](docs/client_presentation_guide_CN.md)。
+> - 适应度得分的数学形式与多目标运筹学推导详见 [docs/fitness_and_objective_design_CN.md](docs/fitness_and_objective_design_CN.md)。
+> - iPinYou 数据集特征工程与清洗规范详见 [docs/ipinyou_real_data_report_CN.md](docs/ipinyou_real_data_report_CN.md)。
 
 > 🌐 **在线交互式演化报告 (Live Interactive Reports)**：
 > * **英文报告 (English Version)**: [https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html)
