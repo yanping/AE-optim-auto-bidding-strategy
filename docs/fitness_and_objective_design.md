@@ -151,8 +151,8 @@ AlphaEvolve's code mutation loop is fundamentally an **unconstrained global sear
 
 | Candidate Approach | Mathematical Formulation | Convergence Behavior | Day 7 Oracle Ground-Truth Outcome | Recommendation |
 | :--- | :--- | :--- | :--- | :--- |
-| **Option A: Naive Clicks** | $\mathrm{Fitness} = \mathrm{Clicks}_{\mathrm{cum}}$ | Exploits simulator edge cases with ceiling bids | Budget drained in hours; CPC >300 RMB; disastrous failure | ❌ **Non-Viable** |
-| **Option B: Pure Cost Target** | $\mathrm{Fitness} = - \|\mathrm{CPC}_{\mathrm{final}} - \mathrm{CPC}_{\mathrm{target}}\|$ | Excessively conservative; purchases long-tail traffic | Budget delivery <10%; fails business acquisition volume | ❌ **Commercially Unviable** |
+| **Option A: Naive Clicks** | $`\mathrm{Fitness} = \mathrm{Clicks}_{\mathrm{cum}}`$ | Exploits simulator edge cases with ceiling bids | Budget drained in hours; CPC >300 RMB; disastrous failure | ❌ **Non-Viable** |
+| **Option B: Pure Cost Target** | $`\mathrm{Fitness} = - \lvert \mathrm{CPC}_{\mathrm{final}} - \mathrm{CPC}_{\mathrm{target}} \rvert`$ | Excessively conservative; purchases long-tail traffic | Budget delivery <10%; fails business acquisition volume | ❌ **Commercially Unviable** |
 | **Option C: Piecewise Penalty Fitness (Ours)** | **Penalty Cliffs + Click Maximization + Slack Pacing** | Feasible convergence within 20 gens; smooth cybernetic discovery | **+16.6% Real Clicks; 78.76 RMB CPC honoring 120 RMB cap; 100% compliant** |  **Optimal Production Choice** |
 
 ### 4.2 Key Performance Highlights

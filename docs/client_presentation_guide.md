@@ -188,8 +188,8 @@ $$
 
 | Strategy Category | Description | Real Won Clicks | Real Clearing CPC (RMB) | Win Rate | Constraint Status (120 RMB Cap) |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Mcpc Baseline** | Static marginal value bid ($b = c \cdot p\mathrm{CTR}$) | 247 | 65.15 | 88.5% | Compliant |
-| **Linear Baseline** | Grid-tuned linear bid ($b_0 = 130$) | 281 | 74.89 | 89.2% | Compliant |
+| **Mcpc Baseline** | Static marginal value bid ($`b = c \cdot p\mathrm{CTR}`$) | 247 | 65.15 | 88.5% | Compliant |
+| **Linear Baseline** | Grid-tuned linear bid ($`b_0 = 130`$) | 281 | 74.89 | 89.2% | Compliant |
 | **Human Rule** | Expert human rule seed | 251 | 66.04 | 88.6% | Compliant |
 | **AlphaEvolve v1** | **Evolved Champion Controller** | **288** | **78.76** | **87.8%** | **Compliant (41 RMB Headroom)** |
 

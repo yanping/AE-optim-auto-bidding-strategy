@@ -11,9 +11,9 @@ This project completely discards synthetic data and implements full end-to-end a
 | **Total Impressions** | **3,083,056** | Authentic second-price auction delivery logs (non-synthetic) |
 | **Real Clicks** | **2,454** | Full attribution conversion logs |
 | **Empirical Click-Through Rate (CTR)** | **0.080%** | Conforms to vertical e-commerce conversion distributions (~0.08%) |
-| **Real Clearing Price Range ($Z$)** | **0.0 ~ 300.0 RMB CPM** | Median 60.0 RMB CPM with heavy right-tail competition |
+| **Real Clearing Price Range ($`Z`$)** | **0.0 ~ 300.0 RMB CPM** | Median 60.0 RMB CPM with heavy right-tail competition |
 | **CTR Model Performance** | **AUC = 0.6714** (LogLoss: 0.6548) | Fully satisfies base expected-value estimation |
-| **Kaplan-Meier Win-Rate Calibration** | **$R^2 = 0.9131$, $\mathrm{MAE} = 0.0576$** | Successfully models >91% of real market distribution strictly from **right-censored logs** |
+| **Kaplan-Meier Win-Rate Calibration** | $`R^2 = 0.9131,\ \mathrm{MAE} = 0.0576`$ | Successfully models >91% of real market distribution strictly from **right-censored logs** |
 
 ---
 
