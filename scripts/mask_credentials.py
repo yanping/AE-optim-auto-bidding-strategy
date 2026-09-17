@@ -142,11 +142,17 @@ def mask_files(
         original_content = content
         replacements_count = 0
 
-        # 1. Replace project_id
+        # 1. Replace project_id (protecting public GCS report URLs so GitHub readers can access them)
         if project_id and project_id in content:
+            public_gcs_prefix = f"storage.googleapis.com/auto-bidding-{project_id}"
+            temp_protected_token = "___PROTECTED_PUBLIC_GCS_REPORT_URL___"
+            content = content.replace(public_gcs_prefix, temp_protected_token)
+
             count = content.count(project_id)
             content = content.replace(project_id, PROJECT_ID_PLACEHOLDER)
             replacements_count += count
+
+            content = content.replace(temp_protected_token, public_gcs_prefix)
 
         # 2. Replace ge_app_id
         if ge_app_id and ge_app_id in content:

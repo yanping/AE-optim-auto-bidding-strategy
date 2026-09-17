@@ -60,7 +60,7 @@
 ## 三、 交互式 HTML 演化报告现场演示脚本 (Interactive HTML Report Walkthrough)
 
 现场通过浏览器打开 GCS 在线报告或本地文件（执行 `make report` 自动生成最新任务）：
-* **在线 GCS 访问**：[https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report_zh.html)
+* **在线 GCS 访问**：[https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html)
 * **本地文件路径**：`artifacts/task_20260916_192239/evolution_report_zh.html`
 
 1. **Step 1: 顶部商业汇报提纲演示（Pitch Deck Mode）**

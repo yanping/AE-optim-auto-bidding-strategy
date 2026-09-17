@@ -11,6 +11,10 @@ This framework directly resolves the fundamental challenge of **Advertiser-Side 
 > - For the mathematical formulation and operations research derivation of multi-objective fitness scoring, see [docs/fitness_and_objective_design.md](docs/fitness_and_objective_design.md).
 > - For data schema alignment and exploratory analysis on iPinYou Campaign 1458, see [docs/ipinyou_real_data_report.md](docs/ipinyou_real_data_report.md).
 
+> 🌐 **Live Interactive Evolution Reports**:
+> * **English Version**: [https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html)
+> * **Chinese Version**: [https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html)
+
 ---
 
 ## 🏛️ System Architecture & Production Flywheel
@@ -135,20 +139,26 @@ pip install -r requirements.txt
 This framework provides an end-to-end data pipeline supporting automatic acquisition, custom Campaign ID selection, and date range filtering.
 
 ### 3.1 Acquiring Raw iPinYou Dataset
+The official benchmark archive is `ipinyou.contest.dataset.7z` (~6.30 GB compressed, ~14 GB uncompressed).
+
+> ⚠️ **Dataset Source Availability Note**: The legacy UCL academic portal (`data.computational-advertising.org`) has been permanently decommissioned. This project integrates the community-verified official mirror from [`wnzhang/make-ipinyou-data`](https://github.com/wnzhang/make-ipinyou-data) (PR #11).
+
 ```bash
-# Check existing data status or view manual download instructions:
-make download-data
+# Option 1: Automatic resumable download via verified official mirror (Recommended):
+make download-data SOURCE=dropbox
 
-# Download from a custom direct mirror URL:
-make download-data URL="https://your-mirror.example.com/ipinyou.contest.dataset.7z"
+# Or download directly in terminal with curl:
+curl -L -C - --retry 5 -o data/raw/ipinyou.contest.dataset.7z "https://www.dropbox.com/s/txz0ms0axqf7jrl/ipinyou.contest.dataset.7z?dl=1"
 
-# Or generate a lightweight synthetic dataset (allows instant testing without downloading 6 GB):
+# Option 2: Download manually or via CLI from Kaggle Dataset Mirror:
+# Web UI: https://www.kaggle.com/datasets/lastsummer/ipinyou
+kaggle datasets download -d lastsummer/ipinyou -p data/raw/ --unzip
+
+# Option 3: Instant Synthetic Sample Dataset (Run full evolution without downloading 6.3 GB):
 .venv/bin/python -m src.data.download_data --generate-sample
 ```
 
-If downloading manually, place `ipinyou.contest.dataset.7z` (or the extracted `season2/` folder) into the `data/raw/` directory. Well-known community mirrors:
-- [Kaggle Dataset Mirror](https://www.kaggle.com/datasets/lastsummer/ipinyou)
-- [UCL Computational Advertising Portal](http://data.computational-advertising.org)
+Once downloaded, ensure the archive is located at `data/raw/ipinyou.contest.dataset.7z` (or extracted into `data/raw/season2/`).
 
 ### 3.2 Preparing & Calibrating Data (End-to-End Pipeline)
 ```bash
@@ -241,7 +251,11 @@ make test
 
 ### 1. Conquering Advertiser Censored Feedback (Kaplan-Meier Survival Modeling)
 In real-world RTB, advertisers only observe clearing prices on impressions they win. All losing auctions are **right-censored**. By pioneering the application of non-parametric Kaplan-Meier survival estimation from biostatistics, our system formulates market win rates as:
-$$P(\text{win} \mid b) = 1 - S(b) = 1 - \prod_{t_i \le b} \left(1 - \frac{d_i}{n_i}\right)$$
+
+$$
+P(\mathrm{win} \mid b) = 1 - S(b) = 1 - \prod_{t_i \le b} \left(1 - \frac{d_i}{n_i}\right)
+$$
+
 Without knowing competitor bids, our model achieves a high calibration accuracy of $R^2 = 0.9935$ strictly from advertiser-side logs, establishing a high-fidelity offline simulation foundation.
 
 ### 2. Code-Level Symbolic Evolution (Python AST Search Space)

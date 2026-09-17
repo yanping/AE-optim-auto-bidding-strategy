@@ -34,6 +34,8 @@ from typing import Optional
 DEFAULT_ARCHIVE_PATH = "data/raw/ipinyou.contest.dataset.7z"
 SEASON2_DIR = "data/raw/season2"
 KAGGLE_DATASET = "lastsummer/ipinyou"
+# Verified official dataset mirror from wnzhang/make-ipinyou-data (PR #11)
+DEFAULT_DOWNLOAD_URL = "https://www.dropbox.com/s/txz0ms0axqf7jrl/ipinyou.contest.dataset.7z?dl=1"
 
 
 def format_bytes(size: float) -> str:
@@ -131,25 +133,25 @@ def download_from_kaggle(dest_dir: Path) -> bool:
 
 
 def print_manual_download_guide(dest_path: Path):
-    """Prints friendly manual download instructions."""
+    """Prints friendly download instructions with working mirrors."""
     print("=" * 75)
-    print("ℹ️  HOW TO MANUALLY DOWNLOAD THE IPINYOU BENCHMARK DATASET")
+    print("ℹ️  HOW TO OBTAIN THE IPINYOU RTB BENCHMARK DATASET")
     print("=" * 75)
-    print("Due to academic licensing and large archive size (~6.3 GB), you can obtain")
-    print("the dataset via one of the following community mirrors:")
+    print("Target Archive: ipinyou.contest.dataset.7z (6.30 GB, uncompressed ~14 GB)")
     print()
-    print("1. Kaggle Dataset Mirror (Recommended, Fast & Direct):")
+    print("Option 1: One-click Direct Download via verified official mirror (PR #11):")
+    print("   Run:")
+    print("   $ make download-data SOURCE=dropbox")
+    print("   Or download with curl:")
+    print(f'   $ curl -L -C - --retry 5 -o {dest_path} "{DEFAULT_DOWNLOAD_URL}"')
+    print()
+    print("Option 2: Kaggle Dataset Mirror (Web UI / Kaggle CLI):")
     print("   👉 https://www.kaggle.com/datasets/lastsummer/ipinyou")
-    print("   Download and extract into:")
-    print(f"   {Path(dest_path).resolve().parent}/")
+    print("   Or CLI: kaggle datasets download -d lastsummer/ipinyou -p data/raw/ --unzip")
     print()
-    print("2. Original UCL Computational Advertising Archive:")
-    print("   👉 http://data.computational-advertising.org")
-    print("   Look for: 'ipinyou.contest.dataset.7z'")
-    print()
-    print("3. Command Line via Kaggle CLI:")
-    print("   $ pip install kaggle")
-    print("   $ kaggle datasets download -d lastsummer/ipinyou -p data/raw/ --unzip")
+    print("Option 3: Quick Testing with Synthetic Sample Dataset (Zero download needed):")
+    print("   Run:")
+    print("   $ .venv/bin/python -m src.data.download_data --generate-sample")
     print()
     print(f"Once downloaded, ensure the archive is located at: {dest_path}")
     print("Then run: make prepare-data")
@@ -234,7 +236,7 @@ def main():
     )
     parser.add_argument(
         "--source",
-        choices=["auto", "kaggle", "url"],
+        choices=["auto", "dropbox", "direct", "kaggle", "sample", "guide"],
         default="auto",
         help="Preferred download source mechanism.",
     )
@@ -259,8 +261,13 @@ def main():
     dest_path = Path(args.dest)
     raw_dir = Path(SEASON2_DIR)
 
-    if args.generate_sample:
+    if args.generate_sample or args.source == "sample":
         generate_sample_dataset(campaign_id=args.campaign_id)
+        return
+
+    # User explicitly requested guide
+    if args.source == "guide":
+        print_manual_download_guide(dest_path)
         return
 
     # Check if already present
@@ -271,6 +278,15 @@ def main():
     # User provided direct URL
     if args.url:
         success = download_with_progress(args.url, dest_path)
+        if success:
+            print("Download complete! Next step: run 'make prepare-data'.")
+            return
+        sys.exit(1)
+
+    # User requested verified Dropbox mirror
+    if args.source in ("dropbox", "direct"):
+        print(f"🚀 Downloading official iPinYou benchmark from verified Dropbox mirror...")
+        success = download_with_progress(DEFAULT_DOWNLOAD_URL, dest_path)
         if success:
             print("Download complete! Next step: run 'make prepare-data'.")
             return

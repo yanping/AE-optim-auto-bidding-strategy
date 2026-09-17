@@ -219,8 +219,8 @@ Candidate Policy v2
 
 在向客户汇报演示时，可结合以下自包含交付物：
 * **GCS 在线交互式双语报告**（支持 5 页商业幻灯片投影演示、200 代时序动画回放、点击/成本切换与代码 Diff 查验）：
-  * **中文版报告**：[https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report_zh.html)
-  * **英文版报告**：[https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report.html](https://storage.googleapis.com/auto-bidding-<YOUR_GCP_PROJECT_ID>/auto-bidding-demo/evolution_report.html)
+  * **中文版报告**：[https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html)
+  * **英文版报告**：[https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html)
 * **本地一键重生成命令**：
   ```bash
   make report

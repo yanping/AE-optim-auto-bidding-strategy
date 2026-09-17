@@ -11,6 +11,10 @@
 > - 适应度得分的数学形式与多目标运筹学推导详见 [docs/fitness_and_objective_design.md](docs/fitness_and_objective_design.md)。
 > - iPinYou 数据集特征工程与清洗规范详见 [docs/ipinyou_real_data_report.md](docs/ipinyou_real_data_report.md)。
 
+> 🌐 **在线交互式演化报告 (Live Interactive Reports)**：
+> * **英文报告 (English Version)**: [https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report.html)
+> * **中文报告 (Chinese Version)**: [https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html](https://storage.googleapis.com/auto-bidding-spartan-figure-500309-g2/auto-bidding-demo/evolution_report_zh.html)
+
 ---
 
 ## 🏛️ 系统架构与数据闭环
@@ -135,20 +139,26 @@ pip install -r requirements.txt
 本项目支持从零开始自动化下载原始数据并处理，支持提取任意 Campaign ID 与指定日期区间。
 
 ### 3.1 获取原始 iPinYou 数据集
+原始数据集压缩包为 `ipinyou.contest.dataset.7z`（压缩包约 6.30 GB，解压后约 14 GB）。
+
+> ⚠️ **数据源可用性提示**：原 UCL 学术源（`data.computational-advertising.org`）服务器已永久下线。本项目已接入学术社区权威仓库 [`wnzhang/make-ipinyou-data`](https://github.com/wnzhang/make-ipinyou-data) 官方维护更新（PR #11）验证可用的全量镜像源。
+
 ```bash
-# 检查现有数据或查看手动下载指引：
-make download-data
+# 选项 1：一键通过官方验证镜像源自动断点续传下载（推荐，无需手动打开浏览器）：
+make download-data SOURCE=dropbox
 
-# 从指定直接下载链接获取 (若有镜像 URL)：
-make download-data URL="https://your-mirror.example.com/ipinyou.contest.dataset.7z"
+# 或者直接在终端使用 curl 断点续传下载：
+curl -L -C - --retry 5 -o data/raw/ipinyou.contest.dataset.7z "https://www.dropbox.com/s/txz0ms0axqf7jrl/ipinyou.contest.dataset.7z?dl=1"
 
-# 或使用 Python 脚本生成轻量合成测试集 (无需下载 6GB 即可立即运行与测试)：
+# 选项 2：从 Kaggle 社区镜像手动或通过 CLI 下载：
+# Web 页面: https://www.kaggle.com/datasets/lastsummer/ipinyou
+kaggle datasets download -d lastsummer/ipinyou -p data/raw/ --unzip
+
+# 选项 3：快速合成测试集（无需下载 6.3GB 即可立即运行完整演化流程）：
 .venv/bin/python -m src.data.download_data --generate-sample
 ```
 
-若手动下载，请将 `ipinyou.contest.dataset.7z`（或解压后的 `season2/` 目录）放置于 `data/raw/` 目录下。常用公共镜像：
-- [Kaggle Dataset Mirror](https://www.kaggle.com/datasets/lastsummer/ipinyou)
-- [UCL Computational Advertising Portal](http://data.computational-advertising.org)
+下载完成后，请确保原始文件位于 `data/raw/ipinyou.contest.dataset.7z`（或解压至 `data/raw/season2/`）。
 
 ### 3.2 准备与校准数据 (端到端数据管线)
 ```bash
@@ -241,7 +251,11 @@ make test
 
 ### 1. 突破买方单边删失壁垒 (Kaplan-Meier Survival Modeling)
 在真实 RTB 场景中，买方仅知己方胜出时的第二名出清价，绝大多数流量因落败而呈现**右删失（Right Censored）**特征。本项目首创引入生物医学与可靠性工程的 **分片非参数化 Kaplan-Meier 生存分析**，将竞价胜率形式化为生存函数：
-$$P(\text{win} \mid b) = 1 - S(b) = 1 - \prod_{t_i \le b} \left(1 - \frac{d_i}{n_i}\right)$$
+
+$$
+P(\mathrm{win} \mid b) = 1 - S(b) = 1 - \prod_{t_i \le b} \left(1 - \frac{d_i}{n_i}\right)
+$$
+
 在无需对手报价的前提下，仅凭买方历史日志即实现 $R^2 = 0.9935$ 的胜率预估精度，筑牢离线高保真演化基石。
 
 ### 2. 纯代码符号化演化 (Code-Level Symbolic Evolution)
