@@ -55,7 +55,7 @@ On the held-out Day 7 test split, we compared the non-parametric Kaplan-Meier su
 
 ## 4. Code Deliverables & Pipeline Scripts
 
-* Core Stream Extractor & Parser: [`src/data/ipinyou_stream_extractor.py`](src/data/ipinyou_stream_extractor.py)
-* End-to-End Validation Pipeline: [`src/data/run_ipinyou_pipeline.py`](src/data/run_ipinyou_pipeline.py)
-* Production CTR Prediction Model: [`src/models/ctr_model.py`](src/models/ctr_model.py)
-* Automated Unit Test Suite: [`tests/`](tests/) (Full suite passing)
+* Core Stream Extractor & Parser: [`src/data/ipinyou_stream_extractor.py`](../src/data/ipinyou_stream_extractor.py)
+* End-to-End Validation Pipeline: [`src/data/run_ipinyou_pipeline.py`](../src/data/run_ipinyou_pipeline.py)
+* Production CTR Prediction Model: [`src/models/ctr_model.py`](../src/models/ctr_model.py)
+* Automated Unit Test Suite: [`tests/`](../tests/) (Full suite passing)

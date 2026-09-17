@@ -55,7 +55,7 @@ flowchart LR
 
 ## 4. 交付代码清单
 
-* 核心数据抽取与解析器：[`src/data/ipinyou_stream_extractor.py`](src/data/ipinyou_stream_extractor.py)
-* 全流程端到端校验脚本：[`src/data/run_ipinyou_pipeline.py`](src/data/run_ipinyou_pipeline.py)
-* 工业级 CTR 模型升级：[`src/models/ctr_model.py`](src/models/ctr_model.py)
-* 单元测试用例：[`tests/`](tests/)（全套通过）
+* 核心数据抽取与解析器：[`src/data/ipinyou_stream_extractor.py`](../src/data/ipinyou_stream_extractor.py)
+* 全流程端到端校验脚本：[`src/data/run_ipinyou_pipeline.py`](../src/data/run_ipinyou_pipeline.py)
+* 工业级 CTR 模型升级：[`src/models/ctr_model.py`](../src/models/ctr_model.py)
+* 单元测试用例：[`tests/`](../tests/)（全套通过）

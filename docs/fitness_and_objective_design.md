@@ -46,7 +46,7 @@ Where:
 
 ## 2. End-to-End Fitness Score Calculation Pipeline
 
-Evaluation runs within an AST-isolated sandbox executed by [`src/evaluate.py`](src/evaluate.py) and [`src/program.py`](src/program.py) through three distinct stages:
+Evaluation runs within an AST-isolated sandbox executed by [`src/evaluate.py`](../src/evaluate.py) and [`src/program.py`](../src/program.py) through three distinct stages:
 
 ### 2.1 Simulation Horizon & Stream Processing
 * **Evaluation Dataset**: Day 6 validation split (sampled stream of $N = 5,000$ independent auctions), processed strictly chronologically;
@@ -169,11 +169,11 @@ AlphaEvolve's code mutation loop is fundamentally an **unconstrained global sear
 For code inspection and reproducibility, refer to the following relative repository paths:
 
 1. **Fitness Evaluation Implementation**:
-   * Simulation & Penalty Logic: [`src/program.py` (Lines 85-214)](src/program.py#L85-L214)
-   * Evaluation Harness & Diagnostic Logging: [`src/evaluate.py` (Lines 134-258)](src/evaluate.py#L134-L258)
+   * Simulation & Penalty Logic: [`src/program.py` (Lines 85-214)](../src/program.py#L85-L214)
+   * Evaluation Harness & Diagnostic Logging: [`src/evaluate.py` (Lines 134-258)](../src/evaluate.py#L134-L258)
 2. **Automated Unit Tests & Assertion Suites**:
-   * Evaluation Harness & Penalty Asserts: [`tests/test_evolution.py`](tests/test_evolution.py)
-   * State Bounds & Multiplier Invariants: [`tests/test_bidding.py`](tests/test_bidding.py)
+   * Evaluation Harness & Penalty Asserts: [`tests/test_evolution.py`](../tests/test_evolution.py)
+   * State Bounds & Multiplier Invariants: [`tests/test_bidding.py`](../tests/test_bidding.py)
 3. **Oracle Verification & Reporting**:
-   * Second-Price Clearing Replay: [`src/bidding/benchmark.py`](src/bidding/benchmark.py)
-   * Automated Report Generation: [`src/report.py`](src/report.py)
+   * Second-Price Clearing Replay: [`src/bidding/benchmark.py`](../src/bidding/benchmark.py)
+   * Automated Report Generation: [`src/report.py`](../src/report.py)

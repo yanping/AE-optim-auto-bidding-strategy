@@ -47,7 +47,7 @@ $$
 
 ## 二、 适应度得分（Fitness Score）的完整计算流程
 
-评估过程完全在沙盒沙箱中由 [`src/evaluate.py`](src/evaluate.py) 与 [`src/program.py`](src/program.py) 自动化驱动，全过程分为三个阶段：
+评估过程完全在沙盒沙箱中由 [`src/evaluate.py`](../src/evaluate.py) 与 [`src/program.py`](../src/program.py) 自动化驱动，全过程分为三个阶段：
 
 ### 1. 逐曝光时序仿真环境（Simulation Horizon）
 * **评估数据集**：采用 Day 6 验证集（抽样 $N = 5,000$ 条独立拍卖请求），严格按时间序列流式推进；
@@ -172,11 +172,11 @@ AlphaEvolve 背后的演化循环与大语言模型符号变异，本质上属�
 如需在代码中查阅或复现具体逻辑，可参考以下相对路径文件：
 
 1. **核心适应度计算实现**：
-   * 仿真与分段惩罚：[`src/program.py` (第 85-214 行)](src/program.py#L85-L214)
-   * 适应度函数封装与诊断信息输出：[`src/evaluate.py` (第 134-258 行)](src/evaluate.py#L134-L258)
+   * 仿真与分段惩罚：[`src/program.py` (第 85-214 行)](../src/program.py#L85-L214)
+   * 适应度函数封装与诊断信息输出：[`src/evaluate.py` (第 134-258 行)](../src/evaluate.py#L134-L258)
 2. **自动化测试与断言验证**：
-   * 候选策略执行与异常打分用例：[`tests/test_evolution.py`](tests/test_evolution.py)
-   * 出价状态与乘子边界用例：[`tests/test_bidding.py`](tests/test_bidding.py)
+   * 候选策略执行与异常打分用例：[`tests/test_evolution.py`](../tests/test_evolution.py)
+   * 出价状态与乘子边界用例：[`tests/test_bidding.py`](../tests/test_bidding.py)
 3. **真实测试集 Oracle 验证实现**：
-   * 二阶出清与基准对比：[`src/bidding/benchmark.py`](src/bidding/benchmark.py)
-   * 自动化报表渲染（含 Gemini 机理剖析）：[`src/report.py`](src/report.py)
+   * 二阶出清与基准对比：[`src/bidding/benchmark.py`](../src/bidding/benchmark.py)
+   * 自动化报表渲染（含 Gemini 机理剖析）：[`src/report.py`](../src/report.py)
