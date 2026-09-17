@@ -56,6 +56,7 @@ data/*
 
 # Task and internal development specs
 TASK_SPEC.md
+AGENTS.md
 chat-history.md
 docs/phase_*_execution_plan.md
 docs/phase_*_walkthrough.md

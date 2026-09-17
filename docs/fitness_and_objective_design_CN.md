@@ -25,7 +25,7 @@
 
 ## 一、 业务场景与数学形式化表达
 
-在实时竞价（Real-Time Bidding, RTB）广告投放中，广告主通过 DSP 平台参与毫秒级的二阶密封拍卖（Generalized Second Price Auction）。广告主通常设定固定的预算周期（如单日预算 $B$）以及期望达成的目标转化成本（如单次点击成本上限 $\mathrm{CPC}_{\mathrm{target}}$）。
+在实时竞价（Real-Time Bidding, RTB）广告投放中，广告主通过 DSP 平台参与毫秒级的二阶密封拍卖（Generalized Second Price Auction）。广告主通常设定固定的预算周期（如单日预算 $`B`$）以及期望达成的目标转化成本（如单次点击成本上限 $`\mathrm{CPC}_{\mathrm{target}}`$）。
 
 因此，自动出价代理（Auto-Bidding Agent）的核心优化任务在数学上是一个**带严格不等式约束的随机动态运筹优化问题（Constrained Stochastic Optimization Problem）**：
 
@@ -39,9 +39,9 @@ $$
 $$
 
 其中：
-* $\pi$ 为待演化的自适应出价乘子策略函数 `get_multiplier(state) -> float`；
-* $b_t = \mathrm{CPC}_{\mathrm{target}} \times p\mathrm{CTR}_t \times 1000 \times m_t$ 为实际竞价请求时的出价（以 CPM 为单位）；
-* $\mathrm{Click}_t \in \{0, 1\}$，$\mathrm{Cost}_t$ 为第二名出价出清价格。
+* $`\pi`$ 为待演化的自适应出价乘子策略函数 `get_multiplier(state) -> float`；
+* $`b_t = \mathrm{CPC}_{\mathrm{target}} \times p\mathrm{CTR}_t \times 1000 \times m_t`$ 为实际竞价请求时的出价（以 CPM 为单位）；
+* $`\mathrm{Click}_t \in \{0, 1\}`$，$`\mathrm{Cost}_t`$ 为第二名出价出清价格。
 
 ---
 
@@ -50,22 +50,22 @@ $$
 评估过程完全在沙盒沙箱中由 [`src/evaluate.py`](../src/evaluate.py) 与 [`src/program.py`](../src/program.py) 自动化驱动，全过程分为三个阶段：
 
 ### 1. 逐曝光时序仿真环境（Simulation Horizon）
-* **评估数据集**：采用 Day 6 验证集（抽样 $N = 5,000$ 条独立拍卖请求），严格按时间序列流式推进；
-* **物理状态构建（`BidState`）**：在每个竞价请求 $t$，提取广告主侧真实可观测的物理特征：
-  * **请求级特征**：当前预估点击率 $p\mathrm{CTR}_t$、全盘历史平均点击率 $\overline{p\mathrm{CTR}}$；
-  * **宏观进度特征**：剩余预算比例 `rem_budget_ratio` $\in [0, 1]$、时间进度比例 `time_progress_ratio` $\in [0, 1]$；
-  * **消耗反馈特征**：消耗速率比值 $\mathrm{spend\_velocity} = \frac{\mathrm{Spend}_{\mathrm{actual}}}{\mathrm{Spend}_{\mathrm{ideal}}}$；
-  * **成本控制特征**：累计点击成本 `current_cpc`、成本比例 $\mathrm{cpc\_ratio} = \frac{\mathrm{CPC}_{\mathrm{current}}}{\mathrm{CPC}_{\mathrm{target}}}$；
-  * **滑动窗口短期统计（$W=100$）**：最近竞价胜率 `recent_win_rate`、最近成交均价 `recent_cpc`；
+* **评估数据集**：采用 Day 6 验证集（抽样 $`N = 5,000`$ 条独立拍卖请求），严格按时间序列流式推进；
+* **物理状态构建（`BidState`）**：在每个竞价请求 $`t`$，提取广告主侧真实可观测的物理特征：
+  * **请求级特征**：当前预估点击率 $`p\mathrm{CTR}_t`$、全盘历史平均点击率 $`\overline{p\mathrm{CTR}}`$；
+  * **宏观进度特征**：剩余预算比例 `rem_budget_ratio` ($`\in [0, 1]`$)、时间进度比例 `time_progress_ratio` ($`\in [0, 1]`$)；
+  * **消耗反馈特征**：消耗速率比值 $`\mathrm{spend\_velocity} = \frac{\mathrm{Spend}_{\mathrm{actual}}}{\mathrm{Spend}_{\mathrm{ideal}}}`$；
+  * **成本控制特征**：累计点击成本 `current_cpc`、成本比例 $`\mathrm{cpc\_ratio} = \frac{\mathrm{CPC}_{\mathrm{current}}}{\mathrm{CPC}_{\mathrm{target}}}`$；
+  * **滑动窗口短期统计（$`W=100`$）**：最近竞价胜率 `recent_win_rate`、最近成交均价 `recent_cpc`；
   * **上一周期动作**：上一轮出价乘子 `last_multiplier`。
 
 ### 2. 市场响应与二阶清算结算
-候选策略代码 `get_multiplier(state)` 计算出乘子 $m_t \in [0.5, 2.0]$，折算为单次出价 $b_t$。随后通过离线拟合的买方市场响应模型评估：
-* **胜标概率**：基于 Kaplan-Meier 乘积限生存分析模型（考虑右删失）预测 $P(\mathrm{win} \mid b_t)$；
-* **清算成本**：二阶定价期望扣费 $\mathbb{E}[\mathrm{Cost} \mid \mathrm{win}, b_t]$；
-* **期望新增消耗**：$\Delta \mathrm{Spend} = \frac{\mathbb{E}[\mathrm{Cost}]}{1000} \times P(\mathrm{win} \mid b_t)$；
-* **期望新增点击**：$\Delta \mathrm{Clicks} = p\mathrm{CTR}_t \times P(\mathrm{win} \mid b_t)$；
-* **分布外标记（OOD）**：出价 $b_t$ 超出历史可信出价支撑区间时计入 `ood_count`。
+候选策略代码 `get_multiplier(state)` 计算出乘子 $`m_t \in [0.5, 2.0]`$，折算为单次出价 $`b_t`$。随后通过离线拟合的买方市场响应模型评估：
+* **胜标概率**：基于 Kaplan-Meier 乘积限生存分析模型（考虑右删失）预测 $`P(\mathrm{win} \mid b_t)`$；
+* **清算成本**：二阶定价期望扣费 $`\mathbb{E}[\mathrm{Cost} \mid \mathrm{win}, b_t]`$；
+* **期望新增消耗**：$`\Delta \mathrm{Spend} = \frac{\mathbb{E}[\mathrm{Cost}]}{1000} \times P(\mathrm{win} \mid b_t)`$；
+* **期望新增点击**：$`\Delta \mathrm{Clicks} = p\mathrm{CTR}_t \times P(\mathrm{win} \mid b_t)`$；
+* **分布外标记（OOD）**：出价 $`b_t`$ 超出历史可信出价支撑区间时计入 `ood_count`。
 
 循环递推直到全部数据处理完毕，或因预算彻底耗尽触发提前截断（Early Termination）。
 
@@ -101,13 +101,13 @@ else:
 
 ## 三、 深度辨析：为什么不能直接以“点击数”作为目标函数？
 
-这是许多初涉计算广告或强化学习优化的工程师最常提出的疑问：**“广告主终极目标不就是为了买更多点击吗？为什么不直接把目标函数写成 $\text{Fitness} = \text{cum\_clicks}$？”**
+这是许多初涉计算广告或强化学习优化的工程师最常提出的疑问：**“广告主终极目标不就是为了买更多点击吗？为什么不直接把目标函数写成 $`\mathrm{Fitness} = \mathrm{Clicks}_{\mathrm{cum}}`$？”**
 
 若单纯使用点击数，将直接导致四大系统性灾难：
 
 ### 维度 1：有约束优化现实 vs. 无约束目标陷阱（防止流氓策略天价出价）
 * **流氓策略的形成**：如果优化器只看点击数，LLM 代码生成引擎会迅速发现一条**作弊捷径**：
-  * 在程序中无视任何约束，将所有曝光的乘子死死固定在最大上限 $m=2.0$ 甚至更高；
+  * 在程序中无视任何约束，将所有曝光的乘子死死固定在最大上限 $`m=2.0`$ 甚至更高；
   * 在前 100~200 个请求中，以全场最高价碾压所有竞对，以近乎 100% 的极高胜率迅速拿下 3~5 个点击；
   * 然后，全部预算瞬间耗尽，被迫停止竞价。
 * **业务后果**：
@@ -124,7 +124,7 @@ else:
 
 ### 维度 3：资本边际效率——平衡“防超支”与“防保守未消耗（Under-delivery）”
 在真实的广告平台运营中，**“超支是事故，严重欠消耗（Under-delivery）同样是不可接受的事故”**：
-* 如果只有硬惩罚而无引导，策略很容易演化成“惊弓之鸟”——为了绝对不超标，将出价乘子全面压到最低（$m=0.5$），只买最底层、最便宜的长尾流量；
+* 如果只有硬惩罚而无引导，策略很容易演化成“惊弓之鸟”——为了绝对不超标，将出价乘子全面压到最低（$`m=0.5`$），只买最底层、最便宜的长尾流量；
 * 最终全天仅花掉 5% 的预算，实际 CPC 极低（如 10 元），但全天只买到了 0.2 个点击，导致广告主计划投放的促销拉新目标全部泡汤；
 * **松弛度项的精妙调节**：
 
@@ -132,7 +132,7 @@ $$
 \mathrm{Slack}_{\mathrm{cpc}} = \frac{\mathrm{CPC}_{\mathrm{target}} - \mathrm{CPC}_{\mathrm{final}}}{\mathrm{CPC}_{\mathrm{target}}}
 $$
 
-  公式中引入 $-5.0 \times \mathrm{Slack}_{\mathrm{cpc}}$，相当于在经济学上引入了**“资本闲置机会成本”**：
+  公式中引入 $`-5.0 \times \mathrm{Slack}_{\mathrm{cpc}}`$，相当于在经济学上引入了**“资本闲置机会成本”**：
   * 当策略合规且保本时，若 CPC 远低于目标（表明安全裕量极为充裕），松弛惩罚会驱使策略适度激进放量；
   * 推动出价乘子主动向目标 CPC 靠拢，把预算花在刀刃上，换取更多的总点击规模。
 

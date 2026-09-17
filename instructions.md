@@ -5,10 +5,10 @@ total clicks under a Target CPC constraint and budget constraint in second-price
 
 In online advertising real-time bidding (RTB), advertisers compete in second-price auctions.
 The advertiser's goal is to maximize total clicks subject to two critical business constraints:
-1. **Target CPC Constraint**: The empirical average Cost-Per-Click must satisfy $\mathrm{CPC} \le \mathrm{CPC}_{\mathrm{target}}$.
-2. **Budget Constraint**: Total spend must not exceed the campaign budget $B$ over the flight.
+1. **Target CPC Constraint**: The empirical average Cost-Per-Click must satisfy $`\mathrm{CPC} \le \mathrm{CPC}_{\mathrm{target}}`$.
+2. **Budget Constraint**: Total spend must not exceed the campaign budget $`B`$ over the flight.
 
-Each incoming auction opportunity has an estimated click-through rate ($p\mathrm{CTR}$).
+Each incoming auction opportunity has an estimated click-through rate ($`p\mathrm{CTR}`$).
 The baseline expected-value bid is:
 
 $$
@@ -19,7 +19,7 @@ Your task is to evolve a feedback-control multiplier function:
 ```python
 def get_multiplier(state: BidState) -> float
 ```
-which modulates the base bid as $b = b_{\mathrm{base}} \times m$ where $m \in [0.8, 1.2]$.
+which modulates the base bid as $`b = b_{\mathrm{base}} \times m`$ where $`m \in [0.8, 1.2]`$.
 
 "Better" means achieving significantly more total clicks while strictly respecting the Target CPC constraint and budget pacing.
 
@@ -90,9 +90,9 @@ $$
 
 1. **Non-linear Smooth Feedback**: Replace hard `if/else` jumps with smooth mathematical functions like `math.tanh` or sigmoid to avoid high-frequency market oscillation.
 2. **Asymmetric Risk Response**: Brake sharply when `current_cpc` approaches `target_cpc`, but accelerate smoothly when CPC headroom exists.
-3. **Value-Dependent Scaling**: High-quality traffic ($p\mathrm{CTR} > p\mathrm{CTR}_{\mathrm{avg}}$) warrants higher win priority when budget is healthy; low-quality traffic should be discounted.
-4. **Temporal Momentum / Damping**: Incorporate `state.last_multiplier` with exponential smoothing: $m = \alpha \cdot m_{\mathrm{target}} + (1 - \alpha) \cdot m_{\mathrm{prev}}$.
-5. **Phase-Aware Pacing**: In early flight ($t < 0.2$), explore conservatively; in mid-late flight, tightly couple spend velocity to remaining time.
+3. **Value-Dependent Scaling**: High-quality traffic ($`p\mathrm{CTR} > p\mathrm{CTR}_{\mathrm{avg}}`$) warrants higher win priority when budget is healthy; low-quality traffic should be discounted.
+4. **Temporal Momentum / Damping**: Incorporate `state.last_multiplier` with exponential smoothing: $`m = \alpha \cdot m_{\mathrm{target}} + (1 - \alpha) \cdot m_{\mathrm{prev}}`$.
+5. **Phase-Aware Pacing**: In early flight ($`t < 0.2`$), explore conservatively; in mid-late flight, tightly couple spend velocity to remaining time.
 
 ## Baselines
 

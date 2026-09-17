@@ -24,7 +24,7 @@
 
 ## 1. Business Formulation & Mathematical Framing
 
-In real-time bidding (RTB) digital advertising, advertisers participate in millisecond-level generalized second-price auctions via Demand-Side Platforms (DSPs). Advertisers specify a flight budget (e.g., daily budget $B$) and a target cost per acquisition or click (e.g., Target CPC ceiling $\mathrm{CPC}_{\mathrm{target}}$).
+In real-time bidding (RTB) digital advertising, advertisers participate in millisecond-level generalized second-price auctions via Demand-Side Platforms (DSPs). Advertisers specify a flight budget (e.g., daily budget $`B`$) and a target cost per acquisition or click (e.g., Target CPC ceiling $`\mathrm{CPC}_{\mathrm{target}}`$).
 
 Consequently, the core auto-bidding task constitutes a **Constrained Stochastic Optimization Problem**:
 
@@ -38,9 +38,9 @@ $$
 $$
 
 Where:
-* $\pi$ is the adaptive multiplier policy function `get_multiplier(state: BidState) -> float`;
-* $b_t = \mathrm{CPC}_{\mathrm{target}} \times p\mathrm{CTR}_t \times 1000 \times m_t$ represents the effective bid price submitted to the exchange (CPM);
-* $\mathrm{Click}_t \in \{0, 1\}$, and $\mathrm{Cost}_t$ is the second-highest bid clearing price.
+* $`\pi`$ is the adaptive multiplier policy function `get_multiplier(state: BidState) -> float`;
+* $`b_t = \mathrm{CPC}_{\mathrm{target}} \times p\mathrm{CTR}_t \times 1000 \times m_t`$ represents the effective bid price submitted to the exchange (CPM);
+* $`\mathrm{Click}_t \in \{0, 1\}`$, and $`\mathrm{Cost}_t`$ is the second-highest bid clearing price.
 
 ---
 
@@ -49,21 +49,21 @@ Where:
 Evaluation runs within an AST-isolated sandbox executed by [`src/evaluate.py`](../src/evaluate.py) and [`src/program.py`](../src/program.py) through three distinct stages:
 
 ### 2.1 Simulation Horizon & Stream Processing
-* **Evaluation Dataset**: Day 6 validation split (sampled stream of $N = 5,000$ independent auctions), processed strictly chronologically;
-* **Physical State Construction (`BidState`)**: For each auction $t$, the system constructs observable features:
-  * **Request-Level Signals**: Current estimated click-through rate $p\mathrm{CTR}_t$, historical average click-through rate $\overline{p\mathrm{CTR}}$;
-  * **Pacing & Horizon Signals**: Remaining budget ratio `rem_budget_ratio` $\in [0, 1]$, time progress ratio `time_progress_ratio` $\in [0, 1]$;
-  * **Spend Velocity Feedback**: Ratio of actual spend to ideal linear pacing $\mathrm{spend\_velocity} = \frac{\mathrm{Spend}_{\mathrm{actual}}}{\mathrm{Spend}_{\mathrm{ideal}}}$;
-  * **Cost Control Signals**: Cumulative CPC `current_cpc`, cost ratio $\mathrm{cpc\_ratio} = \frac{\mathrm{CPC}_{\mathrm{current}}}{\mathrm{CPC}_{\mathrm{target}}}$;
-  * **Rolling Window Statistics ($W=100$)**: Short-term win rate `recent_win_rate`, short-term clearing price `recent_cpc`;
+* **Evaluation Dataset**: Day 6 validation split (sampled stream of $`N = 5,000`$ independent auctions), processed strictly chronologically;
+* **Physical State Construction (`BidState`)**: For each auction $`t`$, the system constructs observable features:
+  * **Request-Level Signals**: Current estimated click-through rate $`p\mathrm{CTR}_t`$, historical average click-through rate $`\overline{p\mathrm{CTR}}`$;
+  * **Pacing & Horizon Signals**: Remaining budget ratio `rem_budget_ratio` ($`\in [0, 1]`$), time progress ratio `time_progress_ratio` ($`\in [0, 1]`$);
+  * **Spend Velocity Feedback**: Ratio of actual spend to ideal linear pacing $`\mathrm{spend\_velocity} = \frac{\mathrm{Spend}_{\mathrm{actual}}}{\mathrm{Spend}_{\mathrm{ideal}}}`$;
+  * **Cost Control Signals**: Cumulative CPC `current_cpc`, cost ratio $`\mathrm{cpc\_ratio} = \frac{\mathrm{CPC}_{\mathrm{current}}}{\mathrm{CPC}_{\mathrm{target}}}`$;
+  * **Rolling Window Statistics ($`W=100`$)**: Short-term win rate `recent_win_rate`, short-term clearing price `recent_cpc`;
   * **Temporal Action Memory**: Previous bidding multiplier `last_multiplier`.
 
 ### 2.2 Market Response & Second-Price Clearing Settlement
-Candidate code `get_multiplier(state)` outputs multiplier $m_t \in [0.5, 2.0]$, converted to CPM bid $b_t$. The learned offline market response model evaluates outcomes:
-* **Win Probability**: Predicted via non-parametric Kaplan-Meier survival modeling (incorporating right-censoring): $P(\mathrm{win} \mid b_t)$;
-* **Clearing Cost**: Expected second-price payment conditional on winning: $\mathbb{E}[\mathrm{Cost} \mid \mathrm{win}, b_t]$;
-* **Incremental Expected Spend**: $\Delta \mathrm{Spend} = \frac{\mathbb{E}[\mathrm{Cost}]}{1000} \times P(\mathrm{win} \mid b_t)$;
-* **Incremental Expected Clicks**: $\Delta \mathrm{Clicks} = p\mathrm{CTR}_t \times P(\mathrm{win} \mid b_t)$;
+Candidate code `get_multiplier(state)` outputs multiplier $`m_t \in [0.5, 2.0]`$, converted to CPM bid $`b_t`$. The learned offline market response model evaluates outcomes:
+* **Win Probability**: Predicted via non-parametric Kaplan-Meier survival modeling (incorporating right-censoring): $`P(\mathrm{win} \mid b_t)`$;
+* **Clearing Cost**: Expected second-price payment conditional on winning: $`\mathbb{E}[\mathrm{Cost} \mid \mathrm{win}, b_t]`$;
+* **Incremental Expected Spend**: $`\Delta \mathrm{Spend} = \frac{\mathbb{E}[\mathrm{Cost}]}{1000} \times P(\mathrm{win} \mid b_t)`$;
+* **Incremental Expected Clicks**: $`\Delta \mathrm{Clicks} = p\mathrm{CTR}_t \times P(\mathrm{win} \mid b_t)`$;
 * **Out-of-Distribution (OOD) Tracking**: Bids exceeding empirical support boundaries increment `ood_count`.
 
 Execution loops until the auction horizon finishes or remaining budget reaches zero (triggering early termination).
@@ -100,13 +100,13 @@ else:
 
 ## 3. Deep Analysis: Why Raw Click Volume Fails as an Objective
 
-A common intuition when framing bidding optimization is: *"If the ultimate goal is acquiring conversions, why not set the fitness objective directly to $\mathrm{Fitness} = \mathrm{Clicks}_{\mathrm{cum}}$?"*
+A common intuition when framing bidding optimization is: *"If the ultimate goal is acquiring conversions, why not set the fitness objective directly to $`\mathrm{Fitness} = \mathrm{Clicks}_{\mathrm{cum}}`$?"*
 
 Optimizing raw clicks without structural penalties triggers four severe failure modes:
 
 ### Dimension 1: Constrained Optimization Reality vs. Unconstrained Trap (Rogue Bidding Defense)
 * **The Rogue Strategy Shortcut**: Without hard penalty boundaries, LLMs quickly identify an unconstrained exploit:
-  * Lock multipliers to the ceiling $m = 2.0$ or higher;
+  * Lock multipliers to the ceiling $`m = 2.0`$ or higher;
   * Outbid all competitors on the first 100-200 requests, winning impressions with ~100% win rate and securing 3-5 quick clicks;
   * Exhaust the entire campaign budget in minutes and exit the auction prematurely.
 * **Commercial Fallout**:
@@ -123,7 +123,7 @@ Optimizing raw clicks without structural penalties triggers four severe failure 
 
 ### Dimension 3: Marginal Capital Efficiency — Balancing Over-Spend vs. Under-Delivery
 In commercial DSP operations, **severe under-delivery is just as damaging as a budget overrun**:
-* Without continuous guidance, evolutionary search easily falls into excessive conservatism: lowering all multipliers to the floor ($m = 0.5$) to avoid risk;
+* Without continuous guidance, evolutionary search easily falls into excessive conservatism: lowering all multipliers to the floor ($`m = 0.5`$) to avoid risk;
 * The policy spends only 5% of its budget, achieving a misleadingly low CPC (e.g. 10 RMB), but capturing virtually no clicks, sabotaging customer acquisition targets;
 * **The Slack Incentive Mechanism**:
 
@@ -131,7 +131,7 @@ $$
 \mathrm{Slack}_{\mathrm{cpc}} = \frac{\mathrm{CPC}_{\mathrm{target}} - \mathrm{CPC}_{\mathrm{final}}}{\mathrm{CPC}_{\mathrm{target}}}
 $$
 
-  By incorporating $-5.0 \times \mathrm{Slack}_{\mathrm{cpc}}$, the formulation penalizes idle capital opportunity cost:
+  By incorporating $`-5.0 \times \mathrm{Slack}_{\mathrm{cpc}}`$, the formulation penalizes idle capital opportunity cost:
   * When a policy operates safely below the Target CPC ceiling, the slack penalty incentivizes proactive volume expansion;
   * Pushing the effective CPC closer to the target threshold to capture maximum scale.
 

@@ -134,10 +134,10 @@ The diagram below details the data requirements, visibility constraints, modelin
   * Validation Split (Day 6): 109,543 censored auction logs;
   * Held-Out Blind Test (Day 7): 447,493 raw market auction records.
 * **Visibility Constraints & Feature Space**:
-  * **Known Request Attributes**: Timestamp, ad slot dimensions (e.g. 300x250), ad visibility, publisher vertical, advertiser's own pCTR estimate, submitted bid $b$;
-  * **Winning Impressions ($\mathrm{Win} = 1$)**: In second-price auctions, the buyer only observes clearing price $z$ (the second-highest bid). The winning margin over the competitor is completely unknown;
-  * **Losing Impressions ($\mathrm{Win} = 0$)**: The buyer only observes failure ($z \ge b$). Competitor clearing prices are **right-censored**;
-  * **Conversion Feedback ($\mathrm{Click} = 1$)**: Clicks are observable only on won impressions.
+  * **Known Request Attributes**: Timestamp, ad slot dimensions (e.g. 300x250), ad visibility, publisher vertical, advertiser's own pCTR estimate, submitted bid $`b`$;
+  * **Winning Impressions ($`\mathrm{Win} = 1`$)**: In second-price auctions, the buyer only observes clearing price $`z`$ (the second-highest bid). The winning margin over the competitor is completely unknown;
+  * **Losing Impressions ($`\mathrm{Win} = 0`$)**: The buyer only observes failure ($`z \ge b`$). Competitor clearing prices are **right-censored**;
+  * **Conversion Feedback ($`\mathrm{Click} = 1`$)**: Clicks are observable only on won impressions.
 * **Industrial Significance**: Ad exchanges (ADX) never disclose competitor clearing prices to losing bidders. Any practical bidding optimization system must operate strictly under unilateral censorship.
 
 ---
