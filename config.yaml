@@ -1,0 +1,55 @@
+# ==============================================================================
+# Google Cloud AlphaEvolve Auto-Bidding Optimization Configuration
+# ==============================================================================
+# 本文件为项目的【唯一全局配置文件】(Single Source of Truth)，统一管理 GCP 凭据、
+# 演化超参数、模型混合配比、出价业务参数与评估数据集设置。
+# ==============================================================================
+
+# 1. Google Cloud & Gemini Enterprise 凭据与服务配置
+gcp:
+  project_id: "<YOUR_GCP_PROJECT_ID>" # 请在此填入您的 Google Cloud Project ID (例如: my-gcp-project-123)
+  location: "global"
+  collection: "default_collection"
+  ge_app_id: "<YOUR_GE_APP_ID>" # 请在此填入您的 Gemini Enterprise App/Engine ID (例如: gemini-enterprise-12345678)
+  assistant: "default_assistant"
+  base_url: "discoveryengine.googleapis.com"
+  # 官方 alpha_evolve 库路径 (若在其他路径可在此直接指定绝对或相对路径)
+  alpha_evolve_path: "./alpha_evolve"
+
+# 2. 演化控制与超参数设置
+evolution:
+  title: "Advertiser-Side Auto-Bidding Multiplier Optimization (iPinYou 1458)"
+  problem_description_path: "instructions.md"
+  program_language: "python"
+  max_programs_generated: 200      # 默认最大生成代码变体数 (可由 make run programs=N 覆盖)
+  max_programs_evaluated: 200      # 默认最大评估代码变体数 (可由 make run programs=N 覆盖)
+  concurrency: 4                   # 云端生成并发度
+  worker_concurrency: 4            # 本地并行评估 Worker 线程数
+  parallel_evaluation: false       # 启用本地并行评估 (单机轻量评估推荐 false)
+  idle_timeout_s: 300              # 无新变体生成时的等待超时时间 (秒)
+  metric_name: "fitness"           # 主优化标量指标
+
+# 3. Gemini 大模型生成权重混合配比
+models:
+  - name: "gemini-3.5-flash"
+    weight: 0.70
+  - name: "gemini-3.1-pro-preview"
+    weight: 0.30
+
+# 4. 业务出价与评估环境配置
+bidding:
+  campaign_id: "1458"
+  target_cpc: 120.0                # 目标 CPC (RMB CPM 计价标准)
+  budget: 30000.0                  # 验证批次总预算 (RMB CPM 计价标准)
+  oracle_budget: 25000.0           # Day 7 Held-out 测试集全天预算 (RMB)
+  val_data_path: "data/processed/1458/val_advertiser.parquet"
+  test_oracle_path: "data/processed/1458/test_oracle.parquet"
+  eval_subsample: 5000             # 评估采样数 (用于保证每代评估在 0.5s 内返回)
+
+# 5. 产物目录设置
+artifacts:
+  dir: "./artifacts"
+  history_file: "./artifacts/evolution_history.json"
+  champion_file: "./artifacts/champion_program.py"
+  report_file: "./artifacts/evolution_report.html"
+  oracle_benchmark_file: "./artifacts/oracle_benchmark.json"

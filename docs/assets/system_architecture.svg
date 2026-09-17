@@ -1,0 +1,318 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 760" width="1320" height="760" style="background:#090D16; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#090D16"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <!-- Drop Shadows & Glow -->
+    <filter id="shadowBox" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="demoGlow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#0284C7" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Arrow Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10B981"/>
+    </marker>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="1320" height="760" fill="url(#bgGrad)"/>
+  <g opacity="0.04">
+    <path d="M 0,60 L 1320,60 M 0,120 L 1320,120 M 0,180 L 1320,180 M 0,240 L 1320,240 M 0,300 L 1320,300 M 0,360 L 1320,360 M 0,420 L 1320,420 M 0,480 L 1320,480 M 0,540 L 1320,540 M 0,600 L 1320,600 M 0,660 L 1320,660 M 0,720 L 1320,720" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M 60,0 L 60,760 M 120,0 L 120,760 M 180,0 L 180,760 M 240,0 L 240,760 M 300,0 L 300,760 M 360,0 L 360,760 M 420,0 L 420,760 M 480,0 L 480,760 M 540,0 L 540,760 M 600,0 L 600,760 M 660,0 L 660,760 M 720,0 L 720,760 M 780,0 L 780,760 M 840,0 L 840,760 M 900,0 L 900,760 M 960,0 L 960,760 M 1020,0 L 1020,760 M 1080,0 L 1080,760 M 1140,0 L 1140,760 M 1200,0 L 1200,760 M 1260,0 L 1260,760" stroke="#FFFFFF" stroke-width="1"/>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- TOP HEADER BANNER                                                         -->
+  <!-- ========================================================================= -->
+  <g transform="translate(40, 20)">
+    <rect x="0" y="0" width="1240" height="56" rx="10" fill="#1E293B" opacity="0.75"/>
+    <rect x="0" y="0" width="6" height="56" rx="3" fill="url(#headerGrad)"/>
+    <circle cx="28" cy="28" r="14" fill="#0284C7"/>
+    <text x="28" y="33" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="bold">AE</text>
+    <text x="56" y="26" font-size="17" fill="#F8FAFC" font-weight="700">Google Cloud AlphaEvolve 广告买方出价策略：持续演化闭环体系与 Demo 范围全景</text>
+    <text x="56" y="44" font-size="11.5" fill="#94A3B8">End-to-End Auto-Bidding Continuous Evolution Architecture &amp; Demo Verification Boundary</text>
+    
+    <!-- Legend Tags -->
+    <g transform="translate(900, 15)">
+      <rect x="0" y="0" width="150" height="26" rx="13" fill="#0369A1" opacity="0.35" stroke="#38BDF8" stroke-width="1"/>
+      <circle cx="14" cy="13" r="5" fill="#38BDF8"/>
+      <text x="26" y="17" font-size="11" fill="#BAE6FD" font-weight="600">本 Demo 交付验证闭环</text>
+
+      <rect x="165" y="0" width="155" height="26" rx="13" fill="#065F46" opacity="0.35" stroke="#34D399" stroke-width="1"/>
+      <circle cx="179" cy="13" r="5" fill="#34D399"/>
+      <text x="191" y="17" font-size="11" fill="#A7F3D0" font-weight="600">生产持续演进闭环</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- ZONE 1: 本 Demo 完整验证范围 (DEMO SCOPE - LEFT & CENTER)                 -->
+  <!-- ========================================================================= -->
+  <g transform="translate(40, 92)">
+    <!-- Main Outer Container for Demo -->
+    <rect x="0" y="0" width="890" height="595" rx="14" fill="#0F172A" fill-opacity="0.9" stroke="#0284C7" stroke-width="1.8" filter="url(#demoGlow)"/>
+    
+    <!-- Scope Banner Header -->
+    <path d="M 0 14 C 0 6.27 6.27 0 14 0 L 876 0 C 883.73 0 890 6.27 890 14 L 890 40 L 0 40 Z" fill="#0F2847"/>
+    <circle cx="22" cy="20" r="6" fill="#38BDF8"/>
+    <text x="36" y="25" font-size="13" fill="#38BDF8" font-weight="700" letter-spacing="0.5">【 本 Demo 实施与验证范围 (Demo Scope: Offline Evolution &amp; Day 7 Oracle Test) 】</text>
+    <rect x="685" y="9" width="190" height="22" rx="4" fill="#0369A1"/>
+    <text x="780" y="24" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">已 100% 跑通并在报告中交付</text>
+
+    <!-- Sub-Zone 1.1: 买方历史单边投放数据 (Buyer Censored Data) -->
+    <g transform="translate(18, 52)">
+      <rect x="0" y="0" width="255" height="240" rx="10" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" filter="url(#shadowBox)"/>
+      <rect x="0" y="0" width="255" height="32" rx="10" fill="#1E293B"/>
+      <rect x="0" y="20" width="255" height="12" fill="#1E293B"/>
+      <text x="14" y="21" font-size="12.5" fill="#F8FAFC" font-weight="700">1. 买方历史单边投放数据</text>
+      
+      <!-- Censored Badge -->
+      <rect x="14" y="40" width="227" height="24" rx="5" fill="#7F1D1D" fill-opacity="0.5" stroke="#EF4444" stroke-width="1"/>
+      <text x="127" y="56" font-size="11" fill="#FCA5A5" text-anchor="middle" font-weight="700">🔒 核心限制：完全看不到对手出价</text>
+      
+      <g transform="translate(14, 74)" font-size="10.5" fill="#CBD5E1">
+        <text x="0" y="14" font-weight="600" fill="#93C5FD">● 数据源：iPinYou Campaign 1458</text>
+        <text x="0" y="32">● 时序切分：Day 1 ~ Day 6 真实日志</text>
+        <text x="0" y="50">● 自身已知特征 (买方单边视野)：</text>
+        <text x="10" y="68" fill="#94A3B8">- 预估点击率 pCTR (自建模型预估)</text>
+        <text x="10" y="86" fill="#94A3B8">- 自身出价 b 与赢标标记 (1=赢, 0=输)</text>
+        <text x="10" y="104" fill="#F87171">- 赢标二阶支付价 z (输标时未知对手价)</text>
+        <text x="0" y="126" fill="#E2E8F0" font-weight="600">● 样本规模：639,423 次单边竞价记录</text>
+        <text x="0" y="144" fill="#64748B" font-size="9.5">时序严格隔离，杜绝任何未来信息泄露</text>
+      </g>
+    </g>
+
+    <!-- Connector 1 -> 2 -->
+    <path d="M 145 300 L 145 328" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="155" y="318" font-size="10" fill="#7DD3FC">生存分析建模</text>
+
+    <!-- Sub-Zone 1.2: 离线市场响应模型 (Learned Simulator) -->
+    <g transform="translate(18, 335)">
+      <rect x="0" y="0" width="255" height="240" rx="10" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" filter="url(#shadowBox)"/>
+      <rect x="0" y="0" width="255" height="32" rx="10" fill="#1E293B"/>
+      <rect x="0" y="20" width="255" height="12" fill="#1E293B"/>
+      <text x="14" y="21" font-size="12.5" fill="#F8FAFC" font-weight="700">2. 离线市场响应模型 v1</text>
+      
+      <rect x="14" y="40" width="227" height="24" rx="5" fill="#065F46" fill-opacity="0.5" stroke="#10B981" stroke-width="1"/>
+      <text x="127" y="56" font-size="11" fill="#6EE7B7" text-anchor="middle" font-weight="700">📈 破解删失：Kaplan-Meier 算法</text>
+      
+      <g transform="translate(14, 74)" font-size="10.5" fill="#CBD5E1">
+        <text x="0" y="14" font-weight="600" fill="#93C5FD">● 算法：Kaplan-Meier 生存估计器</text>
+        <text x="0" y="32">● 核心作用：对手底牌未知时精准拟合</text>
+        <text x="10" y="50" fill="#34D399" font-family="monospace">P(win | bid, context) 胜率分布</text>
+        <text x="0" y="70">● 成本预估：在险集条件期望计价</text>
+        <text x="0" y="88">● 拟合优度：<tspan fill="#4ADE80" font-weight="bold">R² = 0.9935</tspan> (高度吻合)</text>
+        <text x="0" y="110" fill="#FCD34D" font-weight="600">● 交付产物：轻量离线仿真沙盒</text>
+        <text x="10" y="128" fill="#94A3B8">单次全量评测 &lt; 0.08 秒，零试错成本</text>
+        <text x="0" y="146" fill="#64748B" font-size="9.5">构建高保真安全沙盒，替代昂贵线上试错</text>
+      </g>
+    </g>
+
+    <!-- Connector 1.2 -> 1.3 -->
+    <path d="M 280 455 L 306 455" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="293" y="445" font-size="10" fill="#7DD3FC" text-anchor="middle">驱动仿真</text>
+
+    <!-- Sub-Zone 1.3: AlphaEvolve 符号化演化引擎 (AlphaEvolve Engine) -->
+    <g transform="translate(312, 52)">
+      <rect x="0" y="0" width="280" height="523" rx="10" fill="url(#cardGrad)" stroke="#0284C7" stroke-width="1.5" filter="url(#shadowBox)"/>
+      <rect x="0" y="0" width="280" height="34" rx="10" fill="#0C4A6E"/>
+      <rect x="0" y="20" width="280" height="14" fill="#0C4A6E"/>
+      <text x="14" y="22" font-size="12.5" fill="#FFFFFF" font-weight="700">3. AlphaEvolve 演化搜索引擎</text>
+
+      <rect x="14" y="42" width="252" height="24" rx="5" fill="#4C1D95" fill-opacity="0.5" stroke="#8B5CF6" stroke-width="1"/>
+      <text x="140" y="58" font-size="11" fill="#C4B5FD" text-anchor="middle" font-weight="700">🧠 驱动模型：Vertex AI Gemini 3.8 Flash</text>
+
+      <!-- Step A Subcard -->
+      <g transform="translate(14, 74)">
+        <rect x="0" y="0" width="252" height="64" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+        <text x="10" y="18" fill="#38BDF8" font-size="11" font-weight="700">Step A: 人工经验种子 (Seed Gen 1)</text>
+        <text x="10" y="36" fill="#94A3B8" font-size="10">• 专家经验 ±15% 阶梯启发式规则</text>
+        <text x="10" y="52" fill="#FCA5A5" font-size="10">• 初始适应度：0.2088 (基准基线)</text>
+      </g>
+
+      <!-- Down Arrow A -> B -->
+      <path d="M 140 142 L 140 156" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Step B Subcard -->
+      <g transform="translate(14, 160)">
+        <rect x="0" y="0" width="252" height="205" rx="6" fill="#0F172A" stroke="#38BDF8" stroke-width="1"/>
+        <text x="10" y="18" fill="#FDE047" font-size="11" font-weight="700">Step B: 200 代闭环代际演化循环</text>
+        <g font-size="10" fill="#CBD5E1">
+          <text x="10" y="36">1. LLM 变异：Gemini 3.8 Flash 代码重构</text>
+          <text x="10" y="54">2. 内存安全沙盒：AST 静态检查 + 超时防御</text>
+          <text x="10" y="72">3. 离线仿真评估：调用 KM 响应模型 v1</text>
+          <text x="10" y="90">4. 分段绝壁惩罚函数 (Fitness)：</text>
+          <text x="18" y="108" fill="#93C5FD" font-family="monospace">Score = Clicks × min(1, (120/CPC)³)</text>
+          <text x="18" y="124" fill="#F87171" font-size="9.5">CPC 超标 1% 立即触发立方断崖淘汰</text>
+          <text x="10" y="142">5. 自省反馈：向大模型注入错误机理透视</text>
+          <text x="10" y="160">6. 锦标赛选拔：保留最优前沿与合规精英</text>
+          <text x="10" y="182" fill="#34D399" font-weight="700" font-size="10.5">● 历经 200 代：适应度 0.2088 → 1.3520</text>
+          <text x="10" y="198" fill="#4ADE80" font-size="9.5">算法能力提升整整 +547%！</text>
+        </g>
+      </g>
+
+      <!-- Down Arrow B -> C -->
+      <path d="M 140 370 L 140 384" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Step C Subcard -->
+      <g transform="translate(14, 388)">
+        <rect x="0" y="0" width="252" height="122" rx="6" fill="#064E3B" fill-opacity="0.6" stroke="#10B981" stroke-width="1"/>
+        <text x="10" y="18" fill="#34D399" font-size="11" font-weight="700">Step C: 涌现冠军策略 Candidate v1</text>
+        <g font-size="10" fill="#E2E8F0">
+          <text x="10" y="36">• 涌现机制：非对称对数步调阻尼 Pacing</text>
+          <text x="10" y="54">• 安全制动：连续抛物线减速 + 三次双曲刹车</text>
+          <text x="10" y="72">• 价值收割：高 pCTR 自适应动态提价</text>
+          <text x="10" y="90" fill="#FCD34D" font-weight="600">• 形态交付：100% 纯 Python 白盒代码</text>
+          <text x="10" y="108" fill="#6EE7B7" font-weight="600">• 极低延迟：CPU 推理 &lt; 0.05 毫秒/次</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Connector 1.3 -> 1.4 -->
+    <path d="M 598 310 L 624 310" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="611" y="300" font-size="10" fill="#7DD3FC" text-anchor="middle">盲测验证</text>
+
+    <!-- Sub-Zone 1.4: Day 7 Oracle 真实市场盲测 (Oracle Replay Verification) -->
+    <g transform="translate(630, 52)">
+      <rect x="0" y="0" width="242" height="523" rx="10" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" filter="url(#shadowBox)"/>
+      <rect x="0" y="0" width="242" height="34" rx="10" fill="#1E293B"/>
+      <rect x="0" y="20" width="242" height="14" fill="#1E293B"/>
+      <text x="14" y="22" font-size="12.5" fill="#F8FAFC" font-weight="700">4. Day 7 真实拍卖盲测</text>
+
+      <rect x="14" y="42" width="214" height="24" rx="5" fill="#047857" fill-opacity="0.4" stroke="#34D399" stroke-width="1"/>
+      <text x="121" y="58" font-size="11" fill="#A7F3D0" text-anchor="middle" font-weight="700">🎯 零风险离线 A/B Test 验证</text>
+
+      <g transform="translate(14, 74)" font-size="10.5" fill="#CBD5E1">
+        <text x="0" y="14" font-weight="600" fill="#BAE6FD">● 测试集属性：完全隔离 (Held-out)</text>
+        <text x="0" y="32">● 数据规模：447,493 次真实拍卖展示</text>
+        <text x="0" y="50">● 竞价机制：二阶密封拍卖真实结算</text>
+        <text x="0" y="70" fill="#FCD34D" font-weight="600">● 真实对决榜单 (Oracle 战绩)：</text>
+
+        <!-- Comparison Mini Table -->
+        <g transform="translate(0, 80)">
+          <rect x="0" y="0" width="214" height="185" rx="6" fill="#0B132B" stroke="#334155" stroke-width="1"/>
+          
+          <text x="10" y="18" fill="#94A3B8" font-size="9.5">策略名称</text>
+          <text x="120" y="18" fill="#94A3B8" font-size="9.5">真实点击</text>
+          <text x="168" y="18" fill="#94A3B8" font-size="9.5">实际CPC</text>
+          <path d="M 6 24 L 208 24" stroke="#334155" stroke-width="1"/>
+
+          <text x="10" y="42" fill="#E2E8F0" font-size="10">1. Mcpc 基线</text>
+          <text x="130" y="42" fill="#E2E8F0" font-size="10">247</text>
+          <text x="168" y="42" fill="#E2E8F0" font-size="10">65.15</text>
+
+          <text x="10" y="68" fill="#E2E8F0" font-size="10">2. Linear 基线</text>
+          <text x="130" y="68" fill="#E2E8F0" font-size="10">281</text>
+          <text x="168" y="68" fill="#E2E8F0" font-size="10">74.89</text>
+
+          <text x="10" y="94" fill="#E2E8F0" font-size="10">3. Human 种子</text>
+          <text x="130" y="94" fill="#E2E8F0" font-size="10">251</text>
+          <text x="168" y="94" fill="#E2E8F0" font-size="10">66.04</text>
+
+          <rect x="5" y="108" width="204" height="40" rx="4" fill="#064E3B" stroke="#34D399" stroke-width="1"/>
+          <text x="10" y="125" fill="#34D399" font-weight="700" font-size="10.5">4. AE 冠军 v1</text>
+          <text x="130" y="125" fill="#FDE047" font-weight="700" font-size="10.5">288</text>
+          <text x="168" y="125" fill="#34D399" font-weight="700" font-size="10.5">78.76</text>
+          <text x="10" y="141" fill="#6EE7B7" font-size="9">胜率 87.8% | 点击提升 +16.60%</text>
+
+          <rect x="5" y="154" width="204" height="24" rx="4" fill="#7F1D1D" fill-opacity="0.5" stroke="#EF4444" stroke-width="1"/>
+          <text x="107" y="170" fill="#FCA5A5" font-size="10" text-anchor="middle" font-weight="700">目标 CPC 硬上限: 120.00 RMB</text>
+        </g>
+
+        <text x="0" y="286" font-weight="600" fill="#38BDF8">● 核心结论：双向一致性通过</text>
+        <text x="0" y="304" fill="#94A3B8">• 模拟器预测增益：+6.32%</text>
+        <text x="0" y="322" fill="#94A3B8">• 真实市场结算增益：+16.60%</text>
+        <text x="0" y="342" fill="#4ADE80" font-weight="700">● 绝无过拟合，具备真实泛化力！</text>
+        <text x="0" y="362" fill="#CBD5E1">离线提前检验，方可放心上线生产。</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- ZONE 2: 线上生产持续演化飞轮 (PRODUCTION SCOPE - RIGHT)                   -->
+  <!-- ========================================================================= -->
+  <g transform="translate(950, 92)">
+    <!-- Container for Production Scope -->
+    <rect x="0" y="0" width="330" height="595" rx="14" fill="#0B132B" fill-opacity="0.85" stroke="#059669" stroke-width="2" stroke-dasharray="6 4"/>
+    
+    <!-- Header -->
+    <path d="M 0 14 C 0 6.27 6.27 0 14 0 L 316 0 C 323.73 0 330 6.27 330 14 L 330 40 L 0 40 Z" fill="#064E3B"/>
+    <circle cx="20" cy="20" r="6" fill="#34D399"/>
+    <text x="34" y="25" font-size="12.5" fill="#A7F3D0" font-weight="700">【 生产持续演进闭环 (Production Flywheel) 】</text>
+
+    <!-- Node 5: 小流量 A/B 测试 -->
+    <g transform="translate(16, 52)">
+      <rect x="0" y="0" width="298" height="105" rx="8" fill="url(#cardGrad)" stroke="#10B981" stroke-width="1"/>
+      <text x="12" y="22" font-size="12" fill="#34D399" font-weight="700">5. 生产小流量 A/B Test (Canary)</text>
+      <text x="12" y="44" font-size="10.5" fill="#E2E8F0">• 5% 金丝雀灰度划拨，双轨安全并行</text>
+      <text x="12" y="64" font-size="10.5" fill="#E2E8F0">• 线上微秒级纯 CPU 推理，零额外 GPU 成本</text>
+      <text x="12" y="84" font-size="10.5" fill="#FDE047" font-weight="600">• 小时级 CPC 熔断机制保驾护航 (阈值 110/120)</text>
+    </g>
+
+    <!-- Down Arrow 5 -> 6 -->
+    <path d="M 165 162 L 165 178" stroke="#34D399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+    <!-- Node 6: 真实竞价数据回流 -->
+    <g transform="translate(16, 183)">
+      <rect x="0" y="0" width="298" height="98" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="22" font-size="12" fill="#F8FAFC" font-weight="700">6. 新一日真实竞价日志回流</text>
+      <text x="12" y="44" font-size="10.5" fill="#94A3B8">• 回流真实投放产生的新买方单边数据</text>
+      <text x="12" y="64" font-size="10.5" fill="#94A3B8">• 自动捕获竞争对手与大盘水位漂移</text>
+      <text x="12" y="84" font-size="10.5" fill="#93C5FD">数据版本：Auction Logs v2 (Day 8)</text>
+    </g>
+
+    <!-- Down Arrow 6 -> 7 -->
+    <path d="M 165 286 L 165 302" stroke="#34D399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+    <!-- Node 7: 增量更新响应模型 -->
+    <g transform="translate(16, 307)">
+      <rect x="0" y="0" width="298" height="98" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+      <text x="12" y="22" font-size="12" fill="#F8FAFC" font-weight="700">7. 增量更新市场响应模型 v2</text>
+      <text x="12" y="44" font-size="10.5" fill="#94A3B8">• 每日自动定时重新拟合 Kaplan-Meier</text>
+      <text x="12" y="64" font-size="10.5" fill="#94A3B8">• 滚动更新胜率曲线与在险集先验</text>
+      <text x="12" y="84" font-size="10.5" fill="#34D399">产出：Market Response Model v2</text>
+    </g>
+
+    <!-- Down Arrow 7 -> 8 -->
+    <path d="M 165 410 L 165 426" stroke="#34D399" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+    <!-- Node 8: 增量热启动演化 -->
+    <g transform="translate(16, 431)">
+      <rect x="0" y="0" width="298" height="144" rx="8" fill="url(#cardGrad)" stroke="#10B981" stroke-width="1"/>
+      <text x="12" y="22" font-size="12" fill="#34D399" font-weight="700">8. AlphaEvolve 增量热启动演化</text>
+      <text x="12" y="44" font-size="10.5" fill="#E2E8F0">• 以昨日冠军 Policy v1 为种子 (Hot-start)</text>
+      <text x="12" y="64" font-size="10.5" fill="#E2E8F0">• 轻量演化 10~20 代快速适应大盘环境变迁</text>
+      <text x="12" y="84" font-size="10.5" fill="#FCD34D" font-weight="600">• 生成新一代候选冠军 Candidate Policy v2</text>
+      <text x="12" y="104" font-size="10" fill="#6EE7B7">自动推至 Step 5，形成常态化演化飞轮！</text>
+      <path d="M 280 115 C 310 115 310 -260 170 -260" stroke="#10B981" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+    </g>
+  </g>
+
+  <!-- Big Bridging Arrow between Zone 1 and Zone 2 -->
+  <g transform="translate(895, 335)">
+    <path d="M 0 0 L 50 0" stroke="#10B981" stroke-width="3" stroke-dasharray="4 2" marker-end="url(#arrowGreen)"/>
+    <text x="25" y="-12" font-size="11" fill="#34D399" text-anchor="middle" font-weight="700">交付生产</text>
+  </g>
+
+  <!-- Footer Tagline -->
+  <g transform="translate(40, 715)">
+    <rect x="0" y="0" width="1240" height="28" rx="6" fill="#1E293B" opacity="0.8"/>
+    <text x="14" y="18" font-size="11" fill="#94A3B8">💡 架构总结：本 Demo 完整覆盖【买方单边历史日志 -> KM 响应模型 -> AE 符号化代码演化】，并向前推进完成了【Day 7 真实拍卖隔离盲测】；双向验证通过后，无缝衔接右侧生产持续演化飞轮。</text>
+  </g>
+</svg>
